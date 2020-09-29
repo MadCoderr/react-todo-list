@@ -26,8 +26,17 @@ class App extends Component {
       title: this.state.item,
     };
 
+    let items = [];
+    if (!this.state.editItem) {
+      items = [...this.state.items, newItem];
+    } else {
+      items = this.state.items.map((item) =>
+        item.id === newItem.id ? newItem : item
+      );
+    }
+
     this.setState({
-      items: [...this.state.items, newItem],
+      items: items,
       item: "",
       id: uuid(),
       editItem: false,
@@ -44,8 +53,13 @@ class App extends Component {
       items: this.state.items.filter((item) => item.id !== id),
     });
   };
-  handleEdit = (id) => {
-    console.log(`Handle Edit ${id}`);
+
+  handleEdit = (id, title) => {
+    this.setState({
+      item: title,
+      id: id,
+      editItem: true,
+    });
   };
 
   render() {

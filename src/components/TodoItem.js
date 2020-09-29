@@ -4,10 +4,10 @@ class TodoItem extends Component {
   render() {
     const { id, title, onEdit, onDelete } = this.props;
     return (
-      <li className="list-group-item  d-flex justify-content-between capitalize-text">
+      <li className="list-group-item  d-flex justify-content-between text-capitalize">
         <h6>{title}</h6>
         <div className="todo-icon">
-          <span className="mx-2 text-success" onClick={() => onEdit(id)}>
+          <span className="mx-2 text-success" onClick={() => onEdit(id, title)}>
             <i style={{ cursor: "pointer" }} className="fa fa-pen"></i>
           </span>
           <span
