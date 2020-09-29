@@ -26,26 +26,23 @@ class App extends Component {
       title: this.state.item,
     };
 
-    const updatedItems = [...this.state.items, newItem];
-
-    this.setState(
-      {
-        items: updatedItems,
-        item: "",
-        id: uuid(),
-        editItem: false,
-      },
-      () => {
-        console.log(this.state.items);
-      }
-    );
+    this.setState({
+      items: [...this.state.items, newItem],
+      item: "",
+      id: uuid(),
+      editItem: false,
+    });
   };
 
   handleClearList = () => {
-    console.log("Handle Clear List");
+    this.setState({
+      items: [],
+    });
   };
   handleDelete = (id) => {
-    console.log(`Handle Delete ${id}`);
+    this.setState({
+      items: this.state.items.filter((item) => item.id !== id),
+    });
   };
   handleEdit = (id) => {
     console.log(`Handle Edit ${id}`);
@@ -55,7 +52,7 @@ class App extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-10 mx-auto col-md-8 mt-5">
+          <div className="col-10 mx-auto col-md-8 my-5">
             <h3 className="text-capitalize text-center">todo input</h3>
             <Input
               item={this.state.item}
