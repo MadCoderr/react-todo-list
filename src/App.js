@@ -7,21 +7,40 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   state = {
-    items: [
-      { id: 1, title: "wake up" },
-      { id: 2, title: "make breakfast" },
-    ],
+    items: [],
     id: uuid(),
     item: "",
     editItem: false,
   };
 
   handleChange = (e) => {
-    console.log("Handle Change");
+    this.setState({
+      item: e.target.value,
+    });
   };
+
   handleSubmit = (e) => {
-    console.log("Handle Submit");
+    e.preventDefault();
+    const newItem = {
+      id: this.state.id,
+      title: this.state.item,
+    };
+
+    const updatedItems = [...this.state.items, newItem];
+
+    this.setState(
+      {
+        items: updatedItems,
+        item: "",
+        id: uuid(),
+        editItem: false,
+      },
+      () => {
+        console.log(this.state.items);
+      }
+    );
   };
+
   handleClearList = () => {
     console.log("Handle Clear List");
   };
@@ -33,7 +52,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.id);
     return (
       <div className="container">
         <div className="row">
